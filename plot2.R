@@ -1,0 +1,8 @@
+data<-read.csv.sql(file ="household_power_consumption.txt",sql= "select * from file where Date in ('1/2/2007','2/2/2007') ",sep =";")
+librar(lubridate)
+h<-paste(data$Date,data$Time)
+g<-dmy_hms(h)
+data<-mutate(data,datetime=g)
+with(data,plot(datetime,Global_active_power,type ="l",xlab = "",ylab ="Globalactivepower(killowatt)" ))
+dev.copy(png,file= "plot2.png")
+dev.off()
